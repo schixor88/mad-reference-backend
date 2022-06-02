@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Student } from './student.dto';
 import { StudentService } from './student.service';
 
@@ -22,6 +22,18 @@ export class StudentController {
   async createStudent(@Body() dto: Student): Promise<any> {
     console.log(dto);
     var response = await this.studentService.createStudent(dto);
+    return response;
+  }
+
+  @Delete('/delete-all')
+  async deleteStudentAll(): Promise<any> {
+    var response = await this.studentService.deleteStudents();
+    return response;
+  }
+
+  @Delete('/delete/:id')
+  async deleteAStudent(@Param('id') id: string): Promise<any> {
+    var response = await this.studentService.deleteSingleStudent(id);
     return response;
   }
 }

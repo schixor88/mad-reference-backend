@@ -29,10 +29,10 @@ model Student {
 
 model Present {
   presentId Int      @id @unique @default(autoincrement())
-  student   Student  @relation(fields: [studentId], references: [id])
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
   date      DateTime @default(now())
 
-  lecture Lecture @relation(fields: [lectureLectureId], references: [lectureId])
+  lecture Lecture @relation(fields: [lectureLectureId], references: [lectureId], onDelete: Cascade)
 
   studentId String
 
@@ -41,9 +41,9 @@ model Present {
 
 model Absent {
   absentId         Int      @id @unique @default(autoincrement())
-  student          Student  @relation(fields: [studentId], references: [id])
+  student          Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
   date             DateTime @default(now())
-  lecture          Lecture  @relation(fields: [lectureLectureId], references: [lectureId])
+  lecture          Lecture  @relation(fields: [lectureLectureId], references: [lectureId], onDelete: Cascade)
   studentId        String
   lectureLectureId Int
 }

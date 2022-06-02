@@ -53,4 +53,26 @@ export class StudentService {
       return responsify.getError('001', 'Error creating student', error);
     }
   }
+
+  async deleteSingleStudent(s_id: string) {
+    try {
+      const result = await this.prisma.student.delete({
+        where: {
+          id: s_id,
+        },
+      });
+      return responsify.getSuccess('000', 'Deleted Student!', result);
+    } catch (error) {
+      return responsify.getSuccess('001', 'Error deleting student', error);
+    }
+  }
+
+  async deleteStudents() {
+    try {
+      const result = await this.prisma.student.deleteMany({});
+      return responsify.getSuccess('000', 'Deleted Successfully', result);
+    } catch (error) {
+      return responsify.getError('001', 'Error delete students', error);
+    }
+  }
 }
