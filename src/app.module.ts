@@ -5,13 +5,22 @@ import { AppService } from './app.service';
 import { AuthModule } from './authentication/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserDetailsModule } from './user-details/userdetails.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
+  providers: [AppService],
+  controllers: [AppController],
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
     AuthModule,
     UserDetailsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+      exclude: ['/api*'],
+      renderPath: '/',
+    }),
   ],
 })
 export class AppModule {}
