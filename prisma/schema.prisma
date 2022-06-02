@@ -18,12 +18,13 @@ model User {
 }
 
 model Student {
-  id       String    @id @unique
+  id       String @id @unique
   fullname String
   faculty  String
   section  String
-  Present  Present[]
-  Absent   Absent[]
+
+  Present Present[]
+  Absent  Absent[]
 }
 
 model Present {
