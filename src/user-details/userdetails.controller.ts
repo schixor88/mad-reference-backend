@@ -1,4 +1,4 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, UseGuards } from '@nestjs/common';
 import { Role } from 'src/rbac/enum/role.enum';
 import { Roles } from 'src/rbac/request.decorator';
 import { JwtAuthGuard } from 'src/rbac/request.guard';
@@ -16,10 +16,16 @@ export class UserDetailController {
 
   //localhost:3939/user/cl3wk8u8q0000h214lumw9ha9
   @Get('/:id')
-  @Roles(Role.Admin)
-  @UseGuards(JwtAuthGuard)
+  // @Roles(Role.Admin)
+  // @UseGuards(JwtAuthGuard)
   async getUserDetails(@Param('id') id: string): Promise<any> {
     var response = await this.userDetailService.getUserDetails(id);
+    return response;
+  }
+
+  @Delete('delete/:id')
+  public async deleteUser(@Param('id') id: string): Promise<any> {
+    var response = await this.userDetailService.deleteUser(id);
     return response;
   }
 }

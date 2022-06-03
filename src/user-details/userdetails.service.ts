@@ -36,6 +36,7 @@ export class UserDetailsService {
         select: {
           username: true,
           id: true,
+          access: true,
         },
       });
       if (result) {
@@ -49,6 +50,27 @@ export class UserDetailsService {
         'Could not process the given user id',
         error,
       );
+    }
+  }
+
+  async deleteUser(u_id: string): Promise<any> {
+    try {
+      const result = await this.prisma.user.delete({
+        where: {
+          id: u_id,
+        },
+      });
+      if (result) {
+        return responsify.getSuccess(
+          '000',
+          'User deleted successfully',
+          result,
+        );
+      } else {
+        return responsify.getError('011', 'Unable to delete user', result);
+      }
+    } catch (error) {
+      return responsify.getError('001', 'Error Deleting User', error);
     }
   }
 }

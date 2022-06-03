@@ -63,7 +63,7 @@ export class StudentService {
       });
       return responsify.getSuccess('000', 'Deleted Student!', result);
     } catch (error) {
-      return responsify.getSuccess('001', 'Error deleting student', error);
+      return responsify.getError('001', 'Error deleting student', error);
     }
   }
 

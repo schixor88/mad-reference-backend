@@ -25,7 +25,7 @@ export class StudentController {
     return response;
   }
 
-  @Delete('/delete-all')
+  @Delete('/delete/all')
   async deleteStudentAll(): Promise<any> {
     var response = await this.studentService.deleteStudents();
     return response;
