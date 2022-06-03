@@ -36,7 +36,8 @@ model Present {
 
   studentId String
 
-  lectureLectureId Int
+
+  lectureLectureId String
 }
 
 model Absent {
@@ -45,13 +46,14 @@ model Absent {
   date             DateTime @default(now())
   lecture          Lecture  @relation(fields: [lectureLectureId], references: [lectureId], onDelete: Cascade)
   studentId        String
-  lectureLectureId Int
+  lectureLectureId String
 }
 
 model Lecture {
-  lectureId  Int       @id @unique @default(autoincrement())
+  lectureId  String    @id @unique
   identifier String
   title      String
+  content    String[]
   Present    Present[]
   Absent     Absent[]
 }
